@@ -1,0 +1,20 @@
+FROM tiangolo/uwsgi-nginx-flask:python2.7-alpine3.7
+
+# use apk package for cryptography - pip install fails
+# https://github.com/pyca/cryptography/issues/4264
+RUN apk update
+RUN apk add --no-cache py-cryptography
+RUN pip install --no-cache-dir -U pip
+
+## app dependencies
+RUN pip install \
+	Flask-Restless \
+	PyMySQL \
+	PyMySQL[rsa] \
+	Flask-SQLAlchemy \
+	requests \
+	redis
+
+COPY uwsgi.ini /etc/uwsgi/uwsgi.ini
+COPY ./uwsgi-streaming.conf /etc/nginx/conf.d/
+COPY ./app /app
