@@ -9,7 +9,7 @@ BUFSIZE = 4096
 
 
 def adsb_poll(url, qfilter, r_client):
-    print 'starting polling data ...'
+    print 'Astarting polling data ...'
     while True:
         try:
             resp = req.get('{}{}'.format(url, qfilter), timeout=60)
