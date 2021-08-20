@@ -11,6 +11,6 @@ if [[ -z "$RUNNING" ]]; then
 	printf "[${SERVICENAME}] not running - now starting\n" 1>&2
 	docker run -d -P --net host \
 		--name "${SERVICENAME}" \
-		-v ${PWD}/config.cfg:/app/config/config/cfg \
+		-v ${PWD}/config.cfg:/app/config/config.cfg \
 	"${IMAGENAME}"
 fi
